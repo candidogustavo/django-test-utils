@@ -100,7 +100,7 @@ class TemplateParser(object):
                 template_obj = template.Template(template_string)
                 rendered_string = template_obj.render(template.Context(out_context))
             except Exception, e:
-                print "EXCEPTION: %s" % e.message
+                print("EXCEPTION: %s" % e.message)
                 rendered_string = ''
             #self.tests.append(rendered_string)
             self.output_ttag(template_string, rendered_string, out_context)

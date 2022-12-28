@@ -32,7 +32,7 @@ class Replay(object):
                 to_pickle = ''.join(buffer)
                 request = MockRequest(self.serial_obj.loads(to_pickle))
                 self.processor.save_request(request)
-                print request['path'], request['time']
+                print(request['path'], request['time'])
                 buffer = []
             elif res_re.search(line):
                 #process response
@@ -40,7 +40,7 @@ class Replay(object):
                 response = MockRequest(self.serial_obj.loads(to_pickle))
                 self.log.append(request, response)
                 self.processer.save_response(request, response)
-                print response['status_code'], response['time']
+                print(response['status_code'], response['time'])
                 buffer = []
             else:
                 buffer.append(line)

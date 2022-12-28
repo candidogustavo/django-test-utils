@@ -79,10 +79,10 @@ class Testmaker(object):
             self.new_tests = False
 
         if self.verbosity > 0:
-            print "Handling app '%s'" % self.app_name
-            print "Logging tests to %s" % self.test_file
+            print("Handling app '%s'" % self.app_name)
+            print("Logging tests to %s" % self.test_file)
             if self.create_fixtures:
-                print "Logging fixtures to %s" % self.fixture_file
+                print("Logging fixtures to %s" % self.fixture_file)
 
     def setup_logging(self, test_file=None, serialize_file=None):
         #supress other logging
@@ -128,24 +128,24 @@ class Testmaker(object):
             self.log.info(t.render(c))
         else:
             if self.verbosity > 0:
-                print "Appending to current log file"
+                print("Appending to current log file")
 
     def insert_middleware(self):
         if self.verbosity > 0:
-            print "Inserting TestMaker logging server..."
+            print("Inserting TestMaker logging server...")
         if 'test_utils.testmaker.middleware.testmaker.TestMakerMiddleware' not in settings.MIDDLEWARE_CLASSES:
             settings.MIDDLEWARE_CLASSES += ('test_utils.testmaker.middleware.testmaker.TestMakerMiddleware',)
 
     def make_fixtures(self):
         if self.verbosity > 0:
-            print "Creating fixture at " + self.fixture_file
+            print("Creating fixture at " + self.fixture_file)
         objects, collected = _relational_dumpdata(self.app, set())
         serial_file = open(self.fixture_file, 'a')
         try:
             django_serializers.serialize(self.fixture_format, objects, stream=serial_file, indent=4)
         except Exception, e:
             if self.verbosity > 0:
-                print ("Unable to serialize database: %s" % e)
+                print("Unable to serialize database: %s" % e)
 
     @classmethod
     def logfile(klass):

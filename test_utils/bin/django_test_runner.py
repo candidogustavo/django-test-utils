@@ -38,7 +38,7 @@ are using Python 2.5 it will just work out of the box for you.
     try:
         app_path = args[0]
     except IndexError:
-        print "You did not provide an app path."
+        print("You did not provide an app path.")
         raise SystemExit
     else:
         if app_path.endswith("/"):
