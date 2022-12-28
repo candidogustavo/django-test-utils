@@ -20,7 +20,7 @@ class Command(BaseCommand):
             default=os.getcwd(), help='Directory to send tests and fixtures to. \
             (defaults to currect directory)')
         parser.add_argument('-x', '--loud', action='store', dest='verbosity', default='1',
-            type='choice', choices=['0', '1', '2'],
+            choices=['0', '1', '2'],
             help='Verbosity level; 0=minimal output, 1=normal output, 2=all output')
         parser.add_argument('-f', '--fixture', action='store_true', dest='fixture', default=False,
             help='Pass -f to not create a fixture for the data.')
