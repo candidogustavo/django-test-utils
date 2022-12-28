@@ -133,8 +133,8 @@ class Testmaker(object):
     def insert_middleware(self):
         if self.verbosity > 0:
             print("Inserting TestMaker logging server...")
-        if 'test_utils.testmaker.middleware.testmaker.TestMakerMiddleware' not in settings.MIDDLEWARE_CLASSES:
-            settings.MIDDLEWARE_CLASSES += ('test_utils.testmaker.middleware.testmaker.TestMakerMiddleware',)
+        if 'test_utils.testmaker.middleware.testmaker.TestMakerMiddleware' not in settings.MIDDLEWARE:
+            settings.MIDDLEWARE += ('test_utils.testmaker.middleware.testmaker.TestMakerMiddleware',)
 
     def make_fixtures(self):
         if self.verbosity > 0:

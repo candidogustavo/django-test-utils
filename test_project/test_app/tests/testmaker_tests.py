@@ -44,6 +44,6 @@ class TestMakerTests(TestCase):
         """
         self.tm.insert_middleware()
         self.tm.insert_middleware()
-        middleware = settings.MIDDLEWARE_CLASSES
+        middleware = settings.MIDDLEWARE
         #A set of the middleware should be the same, meaning the item isn't in twice.
         self.assertEqual(sorted(list(middleware)), sorted(list(set(middleware))))
