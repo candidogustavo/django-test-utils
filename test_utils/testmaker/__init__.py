@@ -143,7 +143,7 @@ class Testmaker(object):
         serial_file = open(self.fixture_file, 'a')
         try:
             django_serializers.serialize(self.fixture_format, objects, stream=serial_file, indent=4)
-        except Exception, e:
+        except Exception as e:
             if self.verbosity > 0:
                 print("Unable to serialize database: %s" % e)
 

@@ -37,4 +37,4 @@ class DiffTestCaseMixin(object):
         """If not first == second, fail with a unified diff."""
         if not first == second:
             msg = self.get_diff_msg(first, second, fromfile, tofile)
-            raise self.failureException, msg
+            raise self.failureException(msg)

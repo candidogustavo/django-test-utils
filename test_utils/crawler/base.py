@@ -185,7 +185,7 @@ class Crawler(object):
                 resp, returned_urls = self.get_url(from_url, to_url)
             except HTMLParseError, e:
                 LOG.error("%s: unable to parse invalid HTML: %s", to_url, e)
-            except Exception, e:
+            except Exception as e:
                 LOG.exception("%s had unhandled exception: %s", to_url, e)
                 continue
             finally:

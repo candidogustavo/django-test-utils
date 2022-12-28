@@ -83,7 +83,7 @@ class Command(BaseCommand):
         for settings_mod in settings_modules:
             try:
                 urlconf = __import__(settings_mod.ROOT_URLCONF, {}, {}, [''])
-            except Exception, e:
+            except Exception as e:
                 logging.exception("Error occurred while trying to load %s: %s", settings_mod.ROOT_URLCONF, str(e))
                 continue
 

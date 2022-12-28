@@ -71,7 +71,7 @@ class Command(BaseCommand):
         #****End New stuff
         try:
             return serializers.serialize(format, objects, indent=indent)
-        except Exception, e:
+        except Exception as e:
             if show_traceback:
                 raise
             raise CommandError("Unable to serialize database: %s" % e)

@@ -22,7 +22,7 @@ class Sanitize(Plugin):
             soup = BeautifulSoup(html)
             if soup.find(text='&lt;') or soup.find(text='&gt;'):
                 LOG.warning("%s has dirty html", kwargs['url'])
-        except Exception, e:
+        except Exception as e:
             # TODO: Derive unique names so we can continue after errors without clobbering past error pages
             fo = open("temp.html", 'w')
             fo.write(kwargs['response'].content)
