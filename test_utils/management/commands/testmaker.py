@@ -12,21 +12,20 @@ from test_utils.testmaker import Testmaker
 
 
 class Command(BaseCommand):
-    option_list = BaseCommand.option_list + (
-        make_option('-a', '--app', action='store', dest='application',
+    def add_arguments(self, parser):
+        parser.add_argument('-a', '--app', action='store', dest='application',
             default=None, help='The name of the application (in the current \
-                    directory) to output data to. (defaults to currect directory)'),
-        make_option('-l', '--logdir', action='store', dest='logdirectory',
+                    directory) to output data to. (defaults to currect directory)')
+        parser.add_argument('-l', '--logdir', action='store', dest='logdirectory',
             default=os.getcwd(), help='Directory to send tests and fixtures to. \
-            (defaults to currect directory)'),
-        make_option('-x', '--loud', action='store', dest='verbosity', default='1',
+            (defaults to currect directory)')
+        parser.add_argument('-x', '--loud', action='store', dest='verbosity', default='1',
             type='choice', choices=['0', '1', '2'],
-            help='Verbosity level; 0=minimal output, 1=normal output, 2=all output'),
-        make_option('-f', '--fixture', action='store_true', dest='fixture', default=False,
-            help='Pass -f to not create a fixture for the data.'),
-        make_option('--format', default='json', dest='format',
-            help='Specifies the output serialization format for fixtures.'),
-    )
+            help='Verbosity level; 0=minimal output, 1=normal output, 2=all output')
+        parser.add_argument('-f', '--fixture', action='store_true', dest='fixture', default=False,
+            help='Pass -f to not create a fixture for the data.')
+        parser.add_argument('--format', default='json', dest='format',
+            help='Specifies the output serialization format for fixtures.')
 
     help = 'Runs the test server with the testmaker output enabled'
     args = '[server:port]'

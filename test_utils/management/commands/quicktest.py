@@ -7,10 +7,9 @@ from optparse import make_option
 import sys
 
 class Command(BaseCommand):
-    option_list = BaseCommand.option_list + (
-        make_option('--noinput', action='store_false', dest='interactive', default=True,
-            help='Tells Django to NOT prompt the user for input of any kind.'),
-    )
+    def add_arguments(self, parser):
+        parser.add_argument('--noinput', action='store_false', dest='interactive', default=True,
+            help='Tells Django to NOT prompt the user for input of any kind.')
     help = 'Runs the test suite, creating a test db IF NEEDED and NOT DESTROYING the test db afterwards.  Otherwise operates exactly as does test.'
     args = '[appname ...]'
 

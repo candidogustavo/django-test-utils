@@ -3,11 +3,10 @@ from django.core.management.base import BaseCommand
 from optparse import make_option
 
 class Command(BaseCommand):
-    option_list = BaseCommand.option_list + (
-        make_option('--addrport', action='store', dest='addrport',
+    def add_arguments(self, parser):
+        parser.add_argument('--addrport', action='store', dest='addrport',
             type='string', default='',
-            help='port number or ipaddr:port to run the server on'),
-    )
+            help='port number or ipaddr:port to run the server on')
     help = 'Runs a development server with data from the given fixture(s).'
     args = '[fixture ...]'
 

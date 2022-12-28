@@ -2,6 +2,7 @@ from collections import defaultdict
 from optparse import make_option
 import logging
 import sys
+import argparse
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
@@ -15,27 +16,32 @@ class LogStatsHandler(logging.Handler):
     def emit(self, record):
         self.stats[record.levelno] += 1
 
+
+
+import argparse
+
 class Command(BaseCommand):
-    option_list = BaseCommand.option_list + (
-        make_option('-p', '--pdb', action='store_true', dest='pdb', default=False,
-            help='Pass -p to drop into pdb on an error'),
-        make_option('-d', '--depth', action='store', dest='depth', default=3,
-            help='Specify the depth to crawl.'),
-        make_option('-s', '--safe', action='store_true', dest='html', default=False,
-            help='Pass -s to check for html fragments in your pages.'),
-        make_option('-r', '--response', action='store_true', dest='response', default=False,
-            help='Pass -r to store the response objects.'),
-        make_option('-t', '--time', action='store_true', dest='time', default=False,
-            help='Pass -t to time your requests.'),
-        make_option('--enable-plugin', action='append', dest='plugins', default=[],
-            help='Enable the specified plugin'),
-        make_option("-o", '--output-dir', action='store', dest='output_dir', default=None,
-            help='If specified, store plugin output in the provided directory'),
-        make_option('--no-parent', action='store_true', dest="no_parent", default=False,
-            help='Do not crawl URLs which do not start with your base URL'),
-        make_option('-a', "--auth", action='store', dest='auth', default=None,
+    def add_arguments(self, parser):
+        parser.add_argument('-p', '--pdb', action='store_true', dest='pdb', default=False,
+            help='Pass -p to drop into pdb on an error')
+        parser.add_argument('-d', '--depth', action='store', dest='depth', default=3,
+            help='Specify the depth to crawl.')
+        parser.add_argument('-s', '--safe', action='store_true', dest='html', default=False,
+            help='Pass -s to check for html fragments in your pages.')
+        parser.add_argument('-r', '--response', action='store_true', dest='response', default=False,
+            help='Pass -r to store the response objects.')
+        parser.add_argument('-t', '--time', action='store_true', dest='time', default=False,
+            help='Pass -t to time your requests.')
+        parser.add_argument('--enable-plugin', action='append', dest='plugins', default=[],
+            help='Enable the specified plugin')
+        parser.add_argument("-o", '--output-dir', action='store', dest='output_dir', default=None,
+            help='If specified, store plugin output in the provided directory')
+        parser.add_argument('--no-parent', action='store_true', dest="no_parent", default=False,
+            help='Do not crawl URLs which do not start with your base URL')
+        parser.add_argument('-a', "--auth", action='store', dest='auth', default=None,
             help='Authenticate (login:user,password:secret) before crawl')
-    )
+
+
 
     help = "Displays all of the url matching routes for the project."
     args = "[relative start url]"
