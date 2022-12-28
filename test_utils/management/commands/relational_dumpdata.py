@@ -3,7 +3,6 @@ from django.core import serializers
 
 from optparse import make_option
 from django.db.models.fields.related import ForeignKey, ManyToManyField
-from django.db.models import get_app, get_apps, get_models
 
 def _relational_dumpdata(app, collected):
     objects = []
@@ -50,12 +49,12 @@ class Command(BaseCommand):
         exclude = options.get('exclude',[])
         show_traceback = options.get('traceback', False)
 
-        excluded_apps = [get_app(app_label) for app_label in exclude]
+        excluded_apps = [apps.get_app_config(app_label) for app_label in exclude]
 
         if len(app_labels) == 0:
-            app_list = [app for app in get_apps() if app not in excluded_apps]
+            app_list = [app for app in apps.get_app_configs() if app not in excluded_apps]
         else:
-            app_list = [get_app(app_label) for app_label in app_labels]
+            app_list = [apps.get_app_config(app_label) for app_label in app_labels]
 
         # Check that the serialization format exists; this is a shortcut to
         # avoid collating all the objects and _then_ failing.

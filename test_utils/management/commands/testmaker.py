@@ -6,6 +6,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from django.core.management import call_command
 from django.db import models
+from django.apps import apps
 
 from test_utils.testmaker import Testmaker
 
@@ -39,7 +40,7 @@ class Command(BaseCommand):
         fixture_format = options.get('format', 'xml')
 
         if app:
-            app = models.get_app(app)
+            app = apps.get_app_config(app)
 
         if not app:
             #Don't serialize the whole DB :)

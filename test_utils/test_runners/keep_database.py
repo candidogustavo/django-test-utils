@@ -2,8 +2,9 @@ from django.test import TestCase
 from django.test.simple import build_test, reorder_suite, build_suite
 from django.test.utils import setup_test_environment, teardown_test_environment
 from django.test.testcases import connections_support_transactions
-from django.db.models import get_app, get_apps
+
 from django.conf import settings
+from django.apps import apps
 try:
     from django.utils import unittest # django's 1.3 copy of unittest2
 except ImportError:
@@ -46,10 +47,10 @@ def run_tests(test_labels, verbosity=1, interactive=True, extra_tests=[]):
             if '.' in label:
                 suite.addTest(build_test(label))
             else:
-                app = get_app(label)
+                app = apps.get_app_config(label)
                 suite.addTest(build_suite(app))
     else:
-        for app in get_apps():
+        for app in apps.get_app_configs():
             suite.addTest(build_suite(app))
 
     for test in extra_tests:
