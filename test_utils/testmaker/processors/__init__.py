@@ -12,7 +12,7 @@ To add your own processors, use the TEST_PROCESSOR_MODULES setting::
 """
 
 from django.conf import settings
-from django.utils import importlib
+from django.utils.importlib import importlib
 
 # Built-in processors
 
